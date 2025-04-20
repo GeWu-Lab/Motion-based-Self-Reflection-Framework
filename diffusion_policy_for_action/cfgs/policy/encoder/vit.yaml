@@ -1,0 +1,4 @@
+_target_: policies.modules.visual_encoder.ViTEncoder
+network_kwargs:
+  name: vit
+  input_channels: 3

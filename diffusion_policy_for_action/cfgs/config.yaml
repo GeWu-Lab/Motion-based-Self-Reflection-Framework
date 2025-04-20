@@ -1,0 +1,45 @@
+defaults:
+  - policy: transformer_policy
+  - dataset: chunking
+  - optimizer: adam
+  - eval_dataset: eval_chunking
+
+seed: 42
+frame_length: 5
+action_chunking: true
+action_length: 12
+action_weight_init: 0
+use_temporal_ensemble: false
+batch_size: 512
+language_condition: task_language
+data_path: dataset_mapping_12.json
+num_diffusion_iters: 5
+
+loss_threshold: 0.01
+task_name: coffee_task_language
+extra_dim: 9
+demonstration_num: 50
+hidden_dim: 512
+diffusion_hidden_dim: 1024
+action_shape: 7
+image_shape: [224,224]
+device: cuda
+root_path: "/ailab/user/xiawenke/workspace/generalizable_manipulation/mimicgen_environments/feedback"
+exp_name: task_name_diffusion_policy
+epoch: 101
+save_interval: 100
+have_depth: false
+have_ego: true
+
+notes: "None"
+split_ratio: 0.9
+eval_interval: 5
+
+load_bc: false
+
+hydra:
+  run:
+    dir: ./train_corl_ckpts/${exp_name}/${now:%Y-%m-%d}/${now:%H-%M-%S}/${task_name}
+  sweep:
+    dir: test/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}

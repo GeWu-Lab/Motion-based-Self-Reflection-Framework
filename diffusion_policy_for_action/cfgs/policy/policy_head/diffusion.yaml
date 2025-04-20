@@ -1,0 +1,7 @@
+_target_: policies.diffusion_policy.TransformerForDiffusion
+network_kwargs:
+  input_dim: ${policy.action_shape}
+  horizon: ${policy.action_length}
+  n_obs_steps: ${policy.frame_length}
+  causal_attn: true
+  global_cond_dim: 1024

@@ -1,0 +1,7 @@
+_target_: policies.policy_head.GMMHead
+network_kwargs:
+  input_size: ${diffusion_hidden_dim}
+  output_size: ${policy.action_shape}
+  num_modes: 5
+  hidden_size: ${hidden_dim}
+  num_layers: 2

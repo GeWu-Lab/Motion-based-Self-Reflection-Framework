@@ -1,0 +1,28 @@
+
+_target_: policies.transformer_policy.BCTransformerPolicy
+hidden_dim: ${hidden_dim}
+num_layers: 2
+action_shape: ${action_shape}
+action_length: ${action_length}
+frame_length: ${frame_length}
+diffusion_hidden_dim: ${diffusion_hidden_dim}
+use_language_idx: ${use_language_idx}
+
+extra_dim: ${extra_dim}
+device: ${device}
+use_flatten: ${use_flatten}
+visual_hidden_dim: ${visual_hidden_dim}
+
+language_codebook_size: ${language_codebook_size}
+transformer_input_size: null
+transformer_num_layers: 4
+transformer_num_heads: 6
+transformer_head_output_size: 64
+transformer_mlp_hidden_size: 128
+transformer_dropout: 0.1
+transformer_max_seq_len: 5
+
+defaults:
+    - encoder: resnet18
+    - position_encoding: sinusoidal_position_encoding
+    - policy_head: diffusion_unet

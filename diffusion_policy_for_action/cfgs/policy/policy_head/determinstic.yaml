@@ -1,0 +1,5 @@
+_target_: policies.policy_head.DeterministicHead
+network_kwargs:
+  input_size: ${diffusion_hidden_dim}
+  output_size: ${policy.action_shape}
+  

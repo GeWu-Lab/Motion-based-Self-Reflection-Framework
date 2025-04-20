@@ -1,0 +1,66 @@
+defaults:
+  - policy: transformer_policy
+  - dataset: idx_speed_chunking
+  - optimizer: adam
+
+lr: 1-e4
+seed: 42
+use_language_idx: true
+action_chunking: true
+action_length: 12
+action_weight_init: 0.01
+use_temporal_ensemble: true
+batch_size: 32
+language_condition: polished_rt_h
+data_path: dataset_mapping.json
+language_codebook_size: 21
+
+loss_threshold: 0.01
+frame_length: 5
+task_name: coffee_language_data_chunking
+extra_dim: 9
+demonstration_num: 10
+action_shape: 7
+image_shape: [224,224]
+device: cuda
+root_path: ${oc.env:CURRENT_DIR}
+exp_name: coffee_language_data_chunking
+have_depth: false
+have_ego: false
+
+load_bc: true
+weight_name: language_diffusion
+bc_path: ${root_path}/weights/${task_name}/${weight_name}.pth
+
+controller_cfg: osc-pose-controller.yml
+controller_type: OSC_POSE
+interface_cfg: charmander.yml
+epoch: 50
+rollout_time: 10
+inference_horizon: 500
+
+kernel_size: 5
+num_diffusion_iters: 5
+use_flatten: false
+visual_hidden_dim: 512
+hidden_dim: 512
+diffusion_hidden_dim: 512
+
+# llava config
+# model_path: "checkpoints/llava-v1.5-7b-coffee-lora"
+model_path: "checkpoints/llava-v1.5-7b_lora_5hz_train_larger_new_task"
+feedback_model_path: "checkpoints/llava-v1.5-7b_lora_5hz_train_subgoal"
+model_base: "liuhaotian/llava-v1.5-7b"
+load_8bit: false
+load_4bit: false
+temperature: 0.
+max_new_tokens: 512
+
+
+
+hydra:
+  run:
+    dir: ./deploy_iclr_results/${exp_name}/${weight_name}/${now:%Y-%m-%d}/${now:%H-%M-%S}/
+  sweep:
+    dir: test/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}

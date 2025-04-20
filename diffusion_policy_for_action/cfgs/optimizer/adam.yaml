@@ -1,0 +1,5 @@
+_target_: torch.optim.AdamW
+network_kwargs: 
+    lr: ${lr}
+    betas: [0.9, 0.999]    
+    weight_decay: 0.0001

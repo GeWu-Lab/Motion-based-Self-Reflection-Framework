@@ -1,0 +1,5 @@
+_target_: policies.modules.visual_encoder.ResNet18Encoder
+network_kwargs:
+  pretrained: false
+  name: resnet18
+  input_channels: 3

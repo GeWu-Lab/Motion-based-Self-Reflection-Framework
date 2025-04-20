@@ -1,0 +1,3 @@
+
+_target_: policies.motion_prediction.MotionPrediction
+output_size: ${language_codebook_size}

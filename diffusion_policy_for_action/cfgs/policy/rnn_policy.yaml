@@ -1,0 +1,23 @@
+
+_target_: policies.rnn_policy.RNNPolicy
+hidden_dim: ${hidden_dim}
+num_layers: 2
+action_shape: ${action_shape}
+action_length: ${action_length}
+frame_length: ${frame_length}
+
+
+extra_dim: ${extra_dim}
+device: ${device}
+
+rnn_hidden_size: 256
+rnn_num_layers: 2
+rnn_dropout: 0.1
+rnn_bidirectional: true
+
+
+
+defaults:
+    - encoder: resnet18
+    - position_encoding: sinusoidal_position_encoding
+    - policy_head: determinstic

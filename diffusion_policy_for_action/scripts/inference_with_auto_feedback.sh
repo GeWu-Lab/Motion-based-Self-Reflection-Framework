@@ -1,0 +1,3 @@
+#!/bin/sh
+export CURRENT_DIR=$(pwd)
+python inference_with_auto_feedback.py weight_name=coffee_d0 task_name=motion_conditioned exp_name=auto_feedback model_path=llava_checkpoints/llava-v1.5-7b_lora_mpm feedback_model_path=llava_checkpoints/llava-v1.5-7b_lora_mcm rollout_time=50 have_ego=false use_language_idx=true language_codebook_size=37 action_length=4 seed=20

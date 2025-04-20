@@ -1,0 +1,12 @@
+
+_target_: policies.bc.BCPolicy
+hidden_dim: ${hidden_dim}
+action_shape: ${action_shape}
+encoder: ${encoder}
+
+extra_dim: ${extra_dim}
+
+
+defaults:
+    - position_encoding: sinusoidal_position_encoding
+    - policy_head: gmm

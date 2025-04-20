@@ -1,0 +1,4 @@
+_target_: policies.modules.visual_encoder.ClipEncoder
+network_kwargs:
+  name: clip
+  input_channels: 3

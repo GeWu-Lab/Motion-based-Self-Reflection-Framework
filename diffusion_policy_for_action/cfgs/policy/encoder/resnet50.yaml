@@ -1,0 +1,5 @@
+_target_: policies.modules.visual_encoder.ResNet50Encoder
+network_kwargs:
+  pretrained: true
+  name: resnet50
+  input_channels: 3

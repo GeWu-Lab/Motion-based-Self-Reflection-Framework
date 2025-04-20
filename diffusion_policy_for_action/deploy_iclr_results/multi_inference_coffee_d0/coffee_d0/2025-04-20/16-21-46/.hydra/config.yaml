@@ -1,0 +1,108 @@
+policy:
+  encoder:
+    _target_: policies.modules.visual_encoder.ResNet18Encoder
+    network_kwargs:
+      pretrained: false
+      name: resnet18
+      input_channels: 3
+  position_encoding:
+    _target_: policies.modules.transformer_modules.SinusoidalPositionEncoding
+    network_kwargs:
+      input_size: null
+      inv_freq_factor: 10
+      factor_ratio: null
+  policy_head:
+    _target_: policies.diffusion_policy.ConditionalUnet1D
+    network_kwargs:
+      input_dim: ${policy.action_shape}
+      horizon: ${policy.action_length}
+      global_cond_dim: ${diffusion_hidden_dim}
+      num_diffusion_iters: ${num_diffusion_iters}
+      kernel_size: ${kernel_size}
+  _target_: policies.transformer_policy.BCTransformerPolicy
+  hidden_dim: ${hidden_dim}
+  num_layers: 2
+  action_shape: ${action_shape}
+  action_length: ${action_length}
+  frame_length: ${frame_length}
+  diffusion_hidden_dim: ${diffusion_hidden_dim}
+  use_language_idx: ${use_language_idx}
+  extra_dim: ${extra_dim}
+  device: ${device}
+  use_flatten: ${use_flatten}
+  visual_hidden_dim: ${visual_hidden_dim}
+  language_codebook_size: ${language_codebook_size}
+  transformer_input_size: null
+  transformer_num_layers: 4
+  transformer_num_heads: 6
+  transformer_head_output_size: 64
+  transformer_mlp_hidden_size: 128
+  transformer_dropout: 0.1
+  transformer_max_seq_len: 5
+dataset:
+  _target_: trajectory_data.TrajectoryIndexSpeedDataset
+  kwargs:
+    data_dir: /ailab/user/xiawenke/workspace/generalizable_manipulation/release_code/diffusion_policy_for_action/train_datasets/${language_condition}
+    data_path: ${data_path}
+    language_condition: ${language_condition}
+    batch_size: ${batch_size}
+    frame_length: ${frame_length}
+    have_depth: ${have_depth}
+    have_ego: ${have_ego}
+    demonstration_num: ${demonstration_num}
+    augmentation_cfg: []
+optimizer:
+  _target_: torch.optim.AdamW
+  network_kwargs:
+    lr: ${lr}
+    betas:
+    - 0.9
+    - 0.999
+    weight_decay: 0.0001
+lr: 1-e4
+seed: 30
+use_language_idx: true
+action_chunking: true
+action_length: 4
+action_weight_init: 0.01
+use_temporal_ensemble: false
+batch_size: 32
+language_condition: polished_rt_h
+data_path: dataset_mapping.json
+language_codebook_size: 37
+loss_threshold: 0.01
+frame_length: 5
+task_name: motion_conditioned
+extra_dim: 9
+demonstration_num: 10
+action_shape: 7
+image_shape:
+- 224
+- 224
+device: cuda
+root_path: /ailab/user/xiawenke/workspace/generalizable_manipulation/release_code/diffusion_policy_for_action
+exp_name: multi_inference_coffee_d0
+have_depth: false
+have_ego: false
+load_bc: true
+weight_name: coffee_d0
+bc_path: ${root_path}/weights/${task_name}/${weight_name}.pth
+controller_cfg: osc-pose-controller.yml
+controller_type: OSC_POSE
+interface_cfg: charmander.yml
+epoch: 50
+rollout_time: 5
+inference_horizon: 500
+kernel_size: 5
+num_diffusion_iters: 5
+use_flatten: false
+visual_hidden_dim: 512
+hidden_dim: 512
+diffusion_hidden_dim: 512
+model_path: ./llava_checkpoints/llava-v1.5-7b_lora_mpm
+feedback_model_path: checkpoints/llava-v1.5-7b_lora_5hz_train_subgoal
+model_base: liuhaotian/llava-v1.5-7b
+load_8bit: false
+load_4bit: false
+temperature: 0.0
+max_new_tokens: 512

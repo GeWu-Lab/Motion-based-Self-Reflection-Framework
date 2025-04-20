@@ -1,0 +1,11 @@
+_target_: trajectory_data.TrajectorySpeedDataset
+kwargs:
+  data_dir: "/ailab/user/xiawenke/workspace/generalizable_manipulation/release_code/diffusion_policy_for_action/train_datasets/${language_condition}"
+  data_path: ${data_path}
+  language_condition: ${language_condition}
+  batch_size: ${batch_size}
+  frame_length: ${frame_length}
+  have_depth: ${have_depth}
+  have_ego: ${have_ego}
+  demonstration_num: ${demonstration_num}
+  augmentation_cfg: []

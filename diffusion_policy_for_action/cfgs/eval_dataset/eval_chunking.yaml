@@ -1,0 +1,10 @@
+_target_: trajectory_data.TrajectoryDataset
+kwargs:
+  data_dir: "${root_path}/eval_expert_data/${task_name}"
+  batch_size: ${batch_size}
+  frame_length: ${frame_length}
+  action_length: ${action_length}
+  have_depth: ${have_depth}
+  have_ego: ${have_ego}
+  # augmentation_cfg: ["shift","color","flip"]
+  augmentation_cfg: []
