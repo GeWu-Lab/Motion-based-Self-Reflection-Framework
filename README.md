@@ -1,7 +1,7 @@
 # Motion-based-Self-Reflection-Framework
-[Project Page]() 
+[Project Page](https://xwinks.github.io/motion_instruction_for_correction/) 
 
-[Arxiv]()
+[Arxiv](https://www.arxiv.org/abs/2504.14588)
 
 ![image](./images/teaser.png)
 
