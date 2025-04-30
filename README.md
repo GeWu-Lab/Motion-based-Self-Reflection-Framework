@@ -4,7 +4,7 @@
 [Arxiv](https://www.arxiv.org/abs/2504.14588)
 
 ![image](./images/teaser.png)
-
+ 
 ## Overview
 In this work, we propose a motion-based self-reflection framework for fine-grained robotic action correction, which leverages motion instruction as a bridge to connect high-level semantic reflection with low-level robotic action correction.
 
